@@ -144,6 +144,18 @@
             background: rgba(255, 179, 71, 0.2);
             transform: scale(1.05);
         }
+
+        .coming-soon {
+            background: rgba(100, 100, 100, 0.1);
+            color: #aaa;
+            border: 1px solid rgba(100, 100, 100, 0.3);
+            cursor: not-allowed;
+        }
+        
+        .coming-soon:hover {
+            background: rgba(100, 100, 100, 0.1);
+            transform: none;
+        }
         
         footer {
             text-align: center;
@@ -212,6 +224,49 @@
             border: none;
         }
         
+        /* 时间显示样式 */
+        .time-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 33, 50, 0.7);
+            border-radius: 15px;
+            padding: 15px 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 179, 71, 0.2);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+
+        .time-display:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 179, 71, 0.4);
+        }
+
+        .time-content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .time-part {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #FFB347, #FFCC33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 179, 71, 0.3);
+        }
+
+        .date-part {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* 增强科技感背景 */
         .tech-bg {
             position: fixed;
             top: 0;
@@ -219,11 +274,140 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1;
+            overflow: hidden;
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 179, 71, 0.2) 0%, transparent 20%),
-                radial-gradient(circle at 90% 60%, rgba(255, 179, 71, 0.2) 0%, transparent 20%),
-                radial-gradient(circle at 50% 80%, rgba(255, 179, 71, 0.2) 0%, transparent 20%);
+                linear-gradient(rgba(255, 179, 71, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 179, 71, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        .glowing-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.2;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .orb:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: #FFB347;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: #FFCC33;
+            top: 60%;
+            left: 70%;
+            animation-delay: -5s;
+        }
+        
+        .orb:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: #4A90E2;
+            top: 30%;
+            left: 80%;
+            animation-delay: -10s;
+        }
+        
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 179, 71, 0.5), transparent);
+            animation: scan 6s linear infinite;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 179, 71, 0.7);
+            border-radius: 50%;
+            animation: particleFloat 20s infinite linear;
+        }
+        
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(20px, -30px) scale(1.1);
+            }
+            50% {
+                transform: translate(-15px, 20px) scale(0.9);
+            }
+            75% {
+                transform: translate(10px, 15px) scale(1.05);
+            }
+        }
+        
+        @keyframes scan {
+            0% {
+                top: 0%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
         }
         
         @media (max-width: 768px) {
@@ -238,11 +422,44 @@
             h1 {
                 font-size: 2.2rem;
             }
+            
+            .time-display {
+                top: 10px;
+                right: 10px;
+                padding: 12px 15px;
+                min-width: 150px;
+            }
+            
+            .time-part {
+                font-size: 1.2rem;
+            }
+            
+            .date-part {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="tech-bg"></div>
+    <!-- 科技感背景 -->
+    <div class="tech-bg">
+        <div class="grid-overlay"></div>
+        <div class="glowing-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="scan-line"></div>
+        <div class="particles" id="particles-container"></div>
+    </div>
+    
+    <!-- 时间显示 -->
+    <div class="time-display">
+        <div class="time-content">
+            <div class="time-part" id="current-time">00:00:00</div>
+            <div class="date-part" id="current-date">2025年1月1日 星期三</div>
+        </div>
+    </div>
     
     <div class="container">
         <header>
@@ -319,6 +536,34 @@
                     <p>随时随地享受有声读物</p>
                     <a href="https://mangots.ikun.ren/" class="project-link" target="_blank">开始听书</a>
                 </div>
+                
+                <!-- 新增的三个模块 -->
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="project-title">MangoAPI</h3>
+                    <p>提供丰富的API接口服务</p>
+                    <a href="https://mangoapi.mysxl.cn" class="project-link" target="_blank">访问API</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="project-title">公告</h3>
+                    <p>查看最新的团队公告和通知</p>
+                    <a href="https://padlet.com/15803437678/mango-1jf11ogq2k7a1giq" class="project-link" target="_blank">查看公告</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <h3 class="project-title">更多</h3>
+                    <p>敬请期待更多精彩内容</p>
+                    <a href="javascript:void(0);" class="project-link coming-soon">敬请期待</a>
+                </div>
             </div>
         </main>
         
@@ -339,6 +584,29 @@
     </div>
 
     <script>
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            
+            // 格式化时间
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // 格式化日期
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const date = now.getDate();
+            const dayNames = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const day = dayNames[now.getDay()];
+            document.getElementById('current-date').textContent = `${year}年${month}月${date}日 ${day}`;
+        }
+
+        // 初始调用并设置定时器
+        updateTime();
+        setInterval(updateTime, 1000);
+        
         // 关闭公告功能
         document.querySelector('.close-btn').addEventListener('click', function() {
             document.querySelector('.announcement').style.display = 'none';
@@ -355,6 +623,34 @@
                 this.style.background = 'rgba(30, 33, 50, 0.7)';
             });
         });
+        
+        // 创建粒子效果
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机位置
+                const left = Math.random() * 100;
+                const size = Math.random() * 3 + 1;
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 10 + 15;
+                
+                particle.style.left = `${left}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // 初始化粒子
+        createParticles();
     </script>
 </body>
 </html>
