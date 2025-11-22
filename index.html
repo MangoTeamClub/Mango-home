@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango团队主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0f1d 0%, #1a1e2c 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFB347 0%, #FFCC33 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 0 20px rgba(255, 179, 71, 0.5);
+        }
+        
+        .logo-icon i {
+            color: #000;
+            font-size: 24px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(to right, #FFB347, #FFCC33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 179, 71, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-top: 0.5rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .project-card {
+            background: rgba(30, 33, 50, 0.7);
+            border-radius: 15px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 179, 71, 0.1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #FFB347, #FFCC33);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 179, 71, 0.3);
+        }
+        
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FFB347 0%, #FFCC33 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+        
+        .project-icon i {
+            color: #000;
+            font-size: 24px;
+        }
+        
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 179, 71, 0.1);
+            color: #FFB347;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 179, 71, 0.3);
+        }
+        
+        .project-link:hover {
+            background: rgba(255, 179, 71, 0.2);
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .announcement {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 350px;
+            background: rgba(30, 33, 50, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 179, 71, 0.2);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(255, 179, 71, 0.1);
+            border-bottom: 1px solid rgba(255, 179, 71, 0.2);
+        }
+        
+        .announcement-title {
+            font-weight: 600;
+            color: #FFB347;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: #FFB347;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 179, 71, 0.2);
+        }
+        
+        .announcement-content {
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        
+        .announcement-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 179, 71, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(255, 179, 71, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 179, 71, 0.2) 0%, transparent 20%);
+        }
+        
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .announcement {
+                width: calc(100% - 40px);
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-bg"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-mango"></i>
+                </div>
+                <h1>Mango团队</h1>
+            </div>
+            <p class="tagline">创新科技，创造未来</p>
+        </header>
+        
+        <main>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="project-title">团队官网</h3>
+                    <p>了解Mango团队的最新动态和项目进展</p>
+                    <a href="https://mangoclub.mysxl.cn/" class="project-link" target="_blank">访问官网</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 class="project-title">My-Mango</h3>
+                    <p>个性化Mango体验中心</p>
+                    <a href="https://my-mango.ikun.ren/" class="project-link" target="_blank">访问平台</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="project-title">Mango论坛</h3>
+                    <p>与Mango社区成员交流互动</p>
+                    <a href="https://mymango.freeflarum.com/" class="project-link" target="_blank">访问论坛</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="project-title">Mango影视</h3>
+                    <p>高质量影视内容平台</p>
+                    <a href="http://mangofilm.ikun.ren/" class="project-link" target="_blank">观看影视</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="project-title">Mango音乐</h3>
+                    <p>发现和享受高品质音乐</p>
+                    <a href="https://mangoclub.vvvv.ee/" class="project-link" target="_blank">聆听音乐</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="project-title">123白噪音</h3>
+                    <p>放松身心的白噪音环境</p>
+                    <a href="https://123music.vvvv.ee/" class="project-link" target="_blank">体验白噪音</a>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="project-title">Mango听书</h3>
+                    <p>随时随地享受有声读物</p>
+                    <a href="https://mangots.ikun.ren/" class="project-link" target="_blank">开始听书</a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2022-2025 Mango 保留所有权利</p>
+            <p>© 2022-2025 Mango. All Rights Reserved.</p>
+        </footer>
+    </div>
+    
+    <div class="announcement">
+        <div class="announcement-header">
+            <span class="announcement-title">公告</span>
+            <button class="close-btn">✖</button>
+        </div>
+        <div class="announcement-content">
+            <iframe src="https://mango-gonggao.mysxl.cn/" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // 关闭公告功能
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.querySelector('.announcement').style.display = 'none';
+        });
+        
+        // 添加卡片悬停效果增强
+        const cards = document.querySelectorAll('.project-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(40, 43, 60, 0.8)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(30, 33, 50, 0.7)';
+            });
+        });
+    </script>
+</body>
+</html>
